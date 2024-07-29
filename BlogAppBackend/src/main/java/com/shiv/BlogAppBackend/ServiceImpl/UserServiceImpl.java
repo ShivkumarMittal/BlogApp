@@ -1,4 +1,4 @@
-package com.shiv.BlogAppBackend.Services.Impl;
+package com.shiv.BlogAppBackend.ServiceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;

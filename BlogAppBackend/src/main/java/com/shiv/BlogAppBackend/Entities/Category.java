@@ -1,6 +1,5 @@
 package com.shiv.BlogAppBackend.Entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,17 +9,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
-public class User {
+@NoArgsConstructor
+public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name="user_name",nullable = false)
-    private String name;
-    private String email;
-    private String password;
-    private String about;
+    private Integer categoryId;
+    private String categoryTitle;
+    private String categoryDescription;
 
 }
