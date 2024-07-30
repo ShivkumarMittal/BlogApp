@@ -2,9 +2,13 @@ package com.shiv.BlogAppBackend.ServiceImpl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.shiv.BlogAppBackend.Entities.Category;
@@ -51,44 +55,60 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post updaePost(PostDto postDto, Integer postId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletePost'");
+    public PostDto updaePost(PostDto postDto, Integer postId) {
+        Post post = this.postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Psot", "PostId", postId));
+        post.setTitle(postDto.getTitle());
+        post.setContent(postDto.getContent());
+        post.setImageName(postDto.getImageName());
+
+        Post savedPost = this.postRepo.save(post);
+        return this.modelMapper.map(savedPost,PostDto.class);
+        
+        
+
 
     }
 
     @Override
     public void deletePost(Integer postId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletePost'");
+        Post post = this.postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Psot", "psotId", postId));
+        this.postRepo.delete(post);
     }
 
     @Override
-    public List<Post> getAllPost() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllPost'");
+    public List<PostDto> getAllPost(Integer pageNumber,Integer pageSize) {
+        Pageable p = PageRequest.of(pageNumber, pageSize);
+        Page<Post> pageposts = this.postRepo.findAll(p);
+        List<Post> posts = pageposts.getContent();
+        List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post,PostDto.class)).collect(Collectors.toList());
+        return postDtos;
     }
 
     @Override
-    public Post getPsotById(Integer postId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPsotById'");
+    public PostDto getPostById(Integer postId) {
+        Post post = this.postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post", "PostId", postId));
+        return this.modelMapper.map(post,PostDto.class);
     }
 
     @Override
-    public List<Post> getPostByCategory(Integer categoryId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPostByCategory'");
+    public List<PostDto> getPostByCategory(Integer categoryId) {
+        Category cat = this.categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","categoryId",categoryId));
+        List<Post> posts = this.postRepo.findByCategory(cat);
+        List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post,PostDto.class)).collect(Collectors.toList());
+        return postDtos;
     }
 
     @Override
-    public List<Post> getPostByUser(Integer userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPostByUser'");
+    public List<PostDto> getPostByUser(Integer userId) {
+        User user = this.userRepo.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User","userId",userId));
+        List<Post> posts = this.postRepo.findByUser(user);
+        List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post,PostDto.class)).collect(Collectors.toList());
+        return postDtos;
+        
     }
 
     @Override
-    public List<Post> searchPosts(String keyword) {
+    public List<PostDto> searchPosts(String keyword) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'searchPosts'");
     }

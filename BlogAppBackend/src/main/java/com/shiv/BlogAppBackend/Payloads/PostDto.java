@@ -2,8 +2,7 @@ package com.shiv.BlogAppBackend.Payloads;
 
 import java.util.Date;
 
-
-
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,8 +11,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PostDto {
+    private Integer postId;
 
+    @NotBlank(message = "enter title")
     private String title;
+    @NotBlank(message = "enter content")
     private String content;
 
     private String imageName;
