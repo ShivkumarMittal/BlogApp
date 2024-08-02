@@ -2,7 +2,6 @@ package com.shiv.BlogAppBackend.Services;
 
 import java.util.List;
 
-import com.shiv.BlogAppBackend.Entities.Post;
 import com.shiv.BlogAppBackend.Payloads.PostDto;
 import com.shiv.BlogAppBackend.Payloads.PostResponse;
 
