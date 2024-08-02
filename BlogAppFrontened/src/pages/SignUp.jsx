@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Base from "../Components/Base";
+import { signup } from "../services/user_service";
+import { toast } from "react-toastify";
 import {
   Button,
   Card,
@@ -7,6 +9,7 @@ import {
   CardHeader,
   Container,
   Form,
+  FormFeedback,
   FormGroup,
   Input,
   Label,
@@ -37,23 +40,52 @@ function SignUp() {
   };
 
   //reseting the form
-  const resetData=()=>{
+  const resetData = () => {
     setData({
-      name:'',
-      email:'',
-      password:'',
-      about:''
-    })
-  }
+      name: "",
+      email: "",
+      password: "",
+      about: "",
+    });
+  };
 
   //submit the form
-  const submitForm=(event)=>{
-    event.preventDefault()
+  const submitForm = (event) => {
+    event.preventDefault();
+
+    // if (error.isError) {
+    //   toast.error("Form data is invalid , Please correct it for registration");
+    //   // it means error abhi hai yaha se return karenge
+    //   return;
+    // }
+
+    console.log(data);
 
     //data validate on client side
 
     // call server api for sending data
-  }
+    signup(data)
+      .then((resp) => {
+        console.log(resp);
+        console.log("success log");
+        toast.success("User register successfully");
+        setData({
+          name: "",
+          email: "",
+          password: "",
+          about: "",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("error log");
+        // handle error is proper manner
+        setError({
+          errors: error,
+          isError: true,
+        });
+      });
+  };
   return (
     <Base>
       <Container className="p-5">
@@ -73,7 +105,9 @@ function SignUp() {
                   id="name"
                   onChange={(e) => handleChange(e, "name")}
                   value={data.name}
+                  invalid={error.errors?.response?.data.name ? true : false}
                 ></Input>
+                <FormFeedback>{error.errors?.response?.data.name}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="email">Enter Email</Label>
@@ -83,7 +117,9 @@ function SignUp() {
                   id="email"
                   onChange={(e) => handleChange(e, "email")}
                   value={data.email}
+                  invalid={error.errors?.response?.data.email ? true : false}
                 ></Input>
+                <FormFeedback>{error.errors?.response?.data.name}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="password">Enter Password</Label>
@@ -93,7 +129,9 @@ function SignUp() {
                   id="password"
                   onChange={(e) => handleChange(e, "password")}
                   value={data.password}
+                  invalid={error.errors?.response?.data.password ? true : false}
                 ></Input>
+                <FormFeedback>{error.errors?.response?.data.name}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="about">Enter About</Label>
@@ -102,11 +140,18 @@ function SignUp() {
                   id="about"
                   onChange={(e) => handleChange(e, "about")}
                   value={data.about}
+                  invalid={error.errors?.response?.data.about ? true : false}
                 ></Input>
+                <FormFeedback>{error.errors?.response?.data.name}</FormFeedback>
               </FormGroup>
               <Container className="text-center">
                 <Button color="dark">Register</Button>
-                <Button onClick={resetData} color="secondary" className="ms-2" type="reset">
+                <Button
+                  onClick={resetData}
+                  color="secondary"
+                  className="ms-2"
+                  type="reset"
+                >
                   Reset
                 </Button>
               </Container>
