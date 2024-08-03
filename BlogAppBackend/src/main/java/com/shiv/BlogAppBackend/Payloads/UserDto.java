@@ -1,5 +1,7 @@
 package com.shiv.BlogAppBackend.Payloads;
 
+
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -26,5 +28,21 @@ public class UserDto {
     private String password;
     @NotBlank(message = "about not blank")
     private String about;
+
+
+
+
+    // // use because i dont want to return password to user on login 
+    // // password not store in localstorage at client side
+    // @JsonIgnore
+    // public String getpassword(){
+    //     return this.password;
+    // }
+
+
+    // @JsonProperty
+    // public void setPassword(String password){
+    //     this.password = password;
+    // }
 
 }
