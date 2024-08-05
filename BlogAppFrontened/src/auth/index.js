@@ -37,9 +37,19 @@ export const doLogout = (next) => {
 export const getCurrentUser = () => {
   if (isLoggedIn()) {
     // convert to object
-    // .user use because no need to return token 
+    // .user use because no need to return token
     return JSON.parse(localStorage.getItem("data")).user;
   } else {
     return undefined;
+  }
+};
+
+// **********************************Method to get token**********************************
+
+export const getToken = () => {
+  if (isLoggedIn) {
+    return JSON.parse(localStorage.getItem("data")).token;
+  } else {
+    return null;
   }
 };
