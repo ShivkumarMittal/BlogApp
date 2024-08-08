@@ -23,7 +23,7 @@ import com.shiv.BlogAppBackend.Services.PostService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/post")
+@RequestMapping("/api")
 public class PostController {
 
     @Autowired

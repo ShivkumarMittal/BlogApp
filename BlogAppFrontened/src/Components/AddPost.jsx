@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Card, CardBody, Container, Form, Label } from "reactstrap";
 import { Input } from "reactstrap";
 import { loadAllCategories } from "../services/category_service";
+import { toast } from "react-toastify";
 import JoditEditor from "jodit-react";
 import { createPost as docreatePost } from "../services/post_service";
 import { getCurrentUser } from "../auth";
@@ -19,7 +20,7 @@ function AddPost() {
   //   placeholder: "Write here about your post.....",
   // };
   useEffect(() => {
-    setuser(getCurrentUser())
+    setuser(getCurrentUser());
     loadAllCategories()
       .then((data) => {
         console.log(data);
@@ -33,7 +34,7 @@ function AddPost() {
 
   const fieldChanged = (event) => {
     // console.log(event);
-    
+
     setPost({ ...post, [event.target.name]: event.target.value });
   };
 
@@ -64,14 +65,21 @@ function AddPost() {
       return;
     }
     // submit form
-    post['userId']=user.id;
+    post["userId"] = user.id;
     docreatePost(post)
       .then((data) => {
-        console.log(data);
+        toast.success("Post Created");
+        setPost({
+          title: "",
+          content: "",
+          categoryId: -1,
+        });
+        // console.log(data);
       })
       .catch((error) => {
-        alert("error");
-        console.log(error);
+        // alert("error");
+        // console.log(error);
+        toast.error("Error Come");
       });
   };
   return (

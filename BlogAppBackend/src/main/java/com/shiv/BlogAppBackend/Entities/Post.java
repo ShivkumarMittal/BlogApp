@@ -2,6 +2,7 @@ package com.shiv.BlogAppBackend.Entities;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer postId;
     private String title;
+    @Column(length = 1000000000)
     private String content;
     private String imageName;
     private Date date;

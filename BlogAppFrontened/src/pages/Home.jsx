@@ -1,12 +1,14 @@
-import React from 'react'
-import Base from '../Components/Base'
+import React from "react";
+import Base from "../Components/Base";
+import NewFeed from "../Components/NewFeed";
 
 function Home() {
+  
   return (
     <Base>
-      <h1>Home page</h1>
+      <NewFeed />
     </Base>
-  )
+  );
 }
 
-export default Home
+export default Home;
