@@ -70,6 +70,24 @@ function PostPage() {
             </Card>
           </Col>
         </Row>
+        <Row className="mt-4">
+          <Col
+            md={{
+              size: 6,
+              offset: 2,
+            }}
+          >
+            <h1>Total Comments {post ? post.comments.length : 0}</h1>
+            {post?.comments &&
+              post.comments.map((c, index) => (
+                <Card className="mt-2 " key={index}>
+                  <CardBody>
+                    <CardText>{c.comment}</CardText>
+                  </CardBody>
+                </Card>
+              ))}
+          </Col>
+        </Row>
       </Container>
     </Base>
   );

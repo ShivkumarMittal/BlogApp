@@ -9,6 +9,7 @@ import com.shiv.BlogAppBackend.Entities.Post;
 import com.shiv.BlogAppBackend.Entities.User;
 import com.shiv.BlogAppBackend.Exception.ResourceNotFoundException;
 import com.shiv.BlogAppBackend.Payloads.CommentDto;
+import com.shiv.BlogAppBackend.Payloads.CommentResponse;
 import com.shiv.BlogAppBackend.Repository.CommentRepo;
 import com.shiv.BlogAppBackend.Repository.PostRepo;
 import com.shiv.BlogAppBackend.Repository.UserRepo;
@@ -28,15 +29,16 @@ public class commentServiceImpl implements CommentService{
     private ModelMapper modelMapper;
 
     @Override
-    public CommentDto createComment(CommentDto commentDto, Integer postId, Integer userId) {
+    public CommentResponse createComment(CommentDto commentDto, Integer postId) {
         Post post = this.postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post", "postId", postId));
-        User user = this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User", "UserId", userId));
+        User user = this.userRepo.findById(commentDto.getUserId()).orElseThrow(()->new ResourceNotFoundException("User", "UserId", commentDto.getUserId()));
         Comment comment = this.modelMapper.map(commentDto,Comment.class);
+        
 
         comment.setPost(post);
         comment.setUser(user);
         Comment savedComment = this.commentRepo.save(comment);
-        return this.modelMapper.map(savedComment,CommentDto.class);
+        return this.modelMapper.map(savedComment,CommentResponse.class);
 
     }
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shiv.BlogAppBackend.Payloads.ApiResponse;
 import com.shiv.BlogAppBackend.Payloads.CommentDto;
+import com.shiv.BlogAppBackend.Payloads.CommentResponse;
 import com.shiv.BlogAppBackend.Services.CommentService;
 
 @RestController
@@ -21,11 +22,11 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @PostMapping("/post/{postId}/user/{userId}/comments")
-    public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto comment,@PathVariable Integer postId ,@PathVariable Integer userId)
+    @PostMapping("/post/{postId}/comments")
+    public ResponseEntity<CommentResponse> createComment(@RequestBody CommentDto comment,@PathVariable Integer postId )
     {
-        CommentDto createdComment = this.commentService.createComment(comment, postId, userId);
-        return new ResponseEntity<CommentDto>(createdComment,HttpStatus.CREATED);
+        CommentResponse createdComment = this.commentService.createComment(comment, postId);
+        return new ResponseEntity<CommentResponse>(createdComment,HttpStatus.CREATED);
 
     }
 
