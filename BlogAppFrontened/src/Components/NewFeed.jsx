@@ -35,6 +35,13 @@ function NewFeed() {
   }, []);
 
   const changePage = (pageNumber = 0, pageSize = 5) => {
+    // console.log(pageNumber);
+    if (pageNumber > postContent.pageNumber && postContent.lastPage) {
+      return;
+    }
+    if (pageNumber < postContent.pageNumber && postContent.pageNumber == 0) {
+      return;
+    }
     loadAllPost(pageNumber, pageSize)
       .then((data) => {
         console.log(data);
@@ -56,12 +63,15 @@ function NewFeed() {
         >
           <h1>Blogs count {postContent?.total_Elements}</h1>
           {postContent?.content.map((post) => (
-            <Post post={post} />
+            <Post post={post} key={post.postId} />
           ))}
 
           <Container className="text-center mt-3">
             <Pagination size="lg">
-              <PaginationItem disabled={postContent.pageNumber == 0}>
+              <PaginationItem
+                onClick={() => changePage(postContent.pageNumber - 1)}
+                disabled={postContent.pageNumber == 0}
+              >
                 <PaginationLink previous>Previous</PaginationLink>
               </PaginationItem>
               {[...Array(postContent.totalPages)].map((item, index) => (
@@ -74,7 +84,7 @@ function NewFeed() {
                 </PaginationItem>
               ))}
               <PaginationItem
-                onClick={() => changePage(++postContent.pageNumber)}
+                onClick={() => changePage(postContent.pageNumber + 1)}
                 disabled={postContent.lastPage}
               >
                 <PaginationLink next>Next</PaginationLink>

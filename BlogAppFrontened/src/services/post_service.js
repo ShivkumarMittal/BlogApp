@@ -17,6 +17,14 @@ export const createPost = (postData) => {
 
 export const loadAllPost = (pageNumber, pageSize) => {
   return myAxios
-    .get(`/api/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+    .get(
+      `/api/posts?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=date&sortDir=desc`
+    )
     .then((response) => response.data);
+};
+
+// load single post by id
+
+export const loadSinglePost = (postId) => {
+  return myAxios.get("/api/posts/" + postId).then((response) => response.data);
 };

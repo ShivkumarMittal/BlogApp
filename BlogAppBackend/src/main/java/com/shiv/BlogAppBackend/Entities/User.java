@@ -62,4 +62,8 @@ public class User implements UserDetails {
         return this.email;
     }
 
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private Set<Comment> comments = new HashSet<>();
+
 }

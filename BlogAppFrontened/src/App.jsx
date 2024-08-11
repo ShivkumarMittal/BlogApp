@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import UserDashboard from "./pages/user_routes/UserDashboard";
 import PrivateRoute from "./Components/PrivateRoute";
 import ProfileInfo from "./pages/user_routes/ProfileInfo";
+import PostPage from "./pages/PostPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/post/:postId" element={<PostPage />} />
         <Route path="/user" element={<PrivateRoute />}>
           <Route path="dashboard" element={<UserDashboard />} />
           <Route path="profile" element={<ProfileInfo />} />
