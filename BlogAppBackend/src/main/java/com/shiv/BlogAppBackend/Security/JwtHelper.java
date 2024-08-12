@@ -29,6 +29,9 @@ public class JwtHelper {
     }
 
     public Date extractExpiration(String token) {
+        // System.out.println("***///4588//5555****");
+        // System.out.println(extractAllClaims(token).getExpiration());
+
         return extractAllClaims(token).getExpiration();
     }
 
@@ -56,7 +59,7 @@ public class JwtHelper {
                 .header().empty().add("typ","JWT")
                 .and()
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 *30)) // 30 minutes expiration time
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 )) // 30 minutes expiration time
                 .signWith(getSigningKey())
                 .compact();
     }

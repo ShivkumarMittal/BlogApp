@@ -15,7 +15,7 @@ import {
 import { createComment, loadSinglePost } from "../services/post_service";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../services/helper";
-import { getCurrentUserId, isLoggedIn } from "../auth";
+import { getCurrentUserId, isLoggedIn, isTokenExpire } from "../auth";
 
 function PostPage() {
   const { postId } = useParams();
@@ -49,7 +49,12 @@ function PostPage() {
 
   const submitComment = () => {
     if (!isLoggedIn()) {
-      toast.error("Need to login firsst");
+      toast.error("Need to login first");
+      return;
+    }
+    if (isTokenExpire()) {
+      toast.error("Your session expired !! Please Login again");
+      return;
     }
     if (comment.comment.trim() == "") {
       return;

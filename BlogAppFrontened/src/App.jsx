@@ -14,8 +14,7 @@ import UserDashboard from "./pages/user_routes/UserDashboard";
 import PrivateRoute from "./Components/PrivateRoute";
 import ProfileInfo from "./pages/user_routes/ProfileInfo";
 import PostPage from "./pages/PostPage";
-
-
+import UserProvider from "./context/UserProvider";
 function App() {
   return (
     <UserProvider>

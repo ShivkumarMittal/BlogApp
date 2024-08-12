@@ -3,7 +3,7 @@ import userContext from "./userContext";
 
 function UserProvider({ children }) {
   const [user, setUser] = useState({
-    name: "Durgesh",
+    name: "shiv",
   });
   return <userContext.Provider value={user}>{children}</userContext.Provider>;
 }

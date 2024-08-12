@@ -1,5 +1,7 @@
 package com.shiv.BlogAppBackend.Controllers;
 
+import java.util.Date;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -51,9 +53,11 @@ public class AuthController {
         System.out.println(request.getUserName()+"*************"+"------------------------");
         UserDetails userDetail = this.userDetailsService.loadUserByUsername(request.getUserName());
         String generatedToken = this.jwtHelper.generateToken(request.getUserName());
+        Date expirationTime = this.jwtHelper.extractExpiration(generatedToken);
         System.out.println(generatedToken+"*************"+"+++++++++++++++++++++++");
         JwtAuthResponse response = new JwtAuthResponse();
         response.setToken(generatedToken);
+        response.setExpirationTime(expirationTime);
         response.setUser(this.modelMapper.map((User) userDetail,UserDto.class));
         return new ResponseEntity<JwtAuthResponse>(response,HttpStatus.OK);
 
