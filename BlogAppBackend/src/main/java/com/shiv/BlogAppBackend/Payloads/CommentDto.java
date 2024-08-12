@@ -10,7 +10,7 @@ public class CommentDto {
 
     private String comment;
 
-    private int userId;
+   
 
     
 

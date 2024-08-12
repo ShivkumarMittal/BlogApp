@@ -28,3 +28,12 @@ export const loadAllPost = (pageNumber, pageSize) => {
 export const loadSinglePost = (postId) => {
   return myAxios.get("/api/posts/" + postId).then((response) => response.data);
 };
+
+// commnet
+
+export const createComment = (comment, postId, userId) => {
+  return privateAxios.post(
+    `/api/post/${postId}/user/${userId}/comments`,
+    comment
+  );
+};

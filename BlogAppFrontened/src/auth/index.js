@@ -44,6 +44,17 @@ export const getCurrentUser = () => {
   }
 };
 
+// **********************************************************************************************
+// get current user id
+export const getCurrentUserId = ()=>{
+  if(getCurrentUser()){
+    return JSON.parse(localStorage.getItem("data")).user.id;
+  }
+  else{
+    return -100;
+  }
+}
+
 // **********************************Method to get token**********************************
 
 export const getToken = () => {

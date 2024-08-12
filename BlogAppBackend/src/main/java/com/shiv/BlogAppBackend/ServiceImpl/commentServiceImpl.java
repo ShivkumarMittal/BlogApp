@@ -29,9 +29,9 @@ public class commentServiceImpl implements CommentService{
     private ModelMapper modelMapper;
 
     @Override
-    public CommentResponse createComment(CommentDto commentDto, Integer postId) {
+    public CommentResponse createComment(CommentDto commentDto, Integer postId,Integer userId) {
         Post post = this.postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post", "postId", postId));
-        User user = this.userRepo.findById(commentDto.getUserId()).orElseThrow(()->new ResourceNotFoundException("User", "UserId", commentDto.getUserId()));
+        User user = this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User", "UserId", userId));
         Comment comment = this.modelMapper.map(commentDto,Comment.class);
         
 

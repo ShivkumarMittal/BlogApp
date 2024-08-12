@@ -7,7 +7,7 @@ import com.shiv.BlogAppBackend.Payloads.CommentResponse;
 
 public interface CommentService {
 
-    public CommentResponse createComment(CommentDto commentDto,Integer postId);
+    public CommentResponse createComment(CommentDto commentDto,Integer postId,Integer userId);
     void deleteComment(Integer commentId);
 
 }
