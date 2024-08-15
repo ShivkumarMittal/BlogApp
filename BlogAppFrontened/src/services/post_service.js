@@ -29,6 +29,19 @@ export const loadSinglePost = (postId) => {
   return myAxios.get("/api/posts/" + postId).then((response) => response.data);
 };
 
+// upload image of post
+export const uploadPostImage = (image, postId) => {
+  let formData = new FormData();
+  formData.append("image", image);
+  return privateAxios
+    .post(`api/post/image/upload/${postId}`, formData, {
+      headers: {
+        "content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
+};
+
 // commnet
 
 export const createComment = (comment, postId, userId) => {

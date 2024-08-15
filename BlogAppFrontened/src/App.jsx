@@ -29,7 +29,7 @@ function App() {
           <Route path="/post/:postId" element={<PostPage />} />
           <Route path="/user" element={<PrivateRoute />}>
             <Route path="dashboard" element={<UserDashboard />} />
-            <Route path="profile" element={<ProfileInfo />} />
+            <Route path="profile/:userId" element={<ProfileInfo />} />
           </Route>
         </Routes>
       </BrowserRouter>

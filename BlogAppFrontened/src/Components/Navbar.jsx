@@ -78,13 +78,15 @@ function CustomNavbar() {
           {login && (
             <>
               <NavItem>
-                <NavLink tag={ReactLink} to="/user/profile">
+                <NavLink tag={ReactLink} to={`/user/profile/${user.id}`}>
                   Profile
                 </NavLink>
               </NavItem>
 
               <NavItem>
-                <NavLink tag={ReactLink} to="/user/dashboard">{user.email}</NavLink>
+                <NavLink tag={ReactLink} to="/user/dashboard">
+                  {user.email}
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink onClick={logout} tag={ReactLink} to="/">

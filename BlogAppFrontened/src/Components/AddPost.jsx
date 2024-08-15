@@ -4,8 +4,12 @@ import { Input } from "reactstrap";
 import { loadAllCategories } from "../services/category_service";
 import { toast } from "react-toastify";
 import JoditEditor from "jodit-react";
-import { createPost as docreatePost } from "../services/post_service";
-import { getCurrentUser } from "../auth";
+import {
+  createPost as docreatePost,
+  uploadPostImage,
+} from "../services/post_service";
+
+import { getCurrentUser, isLoggedIn, isTokenExpire } from "../auth";
 
 function AddPost() {
   const editor = useRef(null);
@@ -16,6 +20,8 @@ function AddPost() {
     content: "",
     categoryId: -1,
   });
+
+  const [image, setImage] = useState(null);
   // const config = {
   //   placeholder: "Write here about your post.....",
   // };
@@ -64,11 +70,26 @@ function AddPost() {
       alert("select category of post !!");
       return;
     }
+    if (!isLoggedIn()) {
+      toast.error("Need to login first");
+      return;
+    }
+    if (isTokenExpire()) {
+      toast.error("Your session expired !! Please Login again");
+      return;
+    }
     // submit form
     post["userId"] = user.id;
     docreatePost(post)
       .then((data) => {
-        toast.success("Post Created");
+        uploadPostImage(image, data.postId)
+          .then((data) => {
+            toast.success("Post Created");
+          })
+          .catch((error) => {
+            toast.error("Error in uploading image");
+          });
+
         setPost({
           title: "",
           content: "",
@@ -81,6 +102,11 @@ function AddPost() {
         // console.log(error);
         toast.error("Error Come");
       });
+  };
+
+  const handleFileChange = (event) => {
+    console.log(event.target.files[0]);
+    setImage(event.target.files[0]);
   };
   return (
     <div>
@@ -112,6 +138,10 @@ function AddPost() {
                 // value={content}
                 onChange={contentfieldChange}
               />
+            </div>
+            <div className="my-3">
+              <Label for="image">Select Image for Post</Label>
+              <Input type="file" id="image" onChange={handleFileChange} />
             </div>
             <div className="my-3">
               <Label for="category">Post Category</Label>
