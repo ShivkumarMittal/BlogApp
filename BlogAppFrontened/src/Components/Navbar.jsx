@@ -36,7 +36,7 @@ function CustomNavbar() {
     });
   };
   return (
-    <Navbar className="px-5 py-4" color="dark" dark expand="md" fixed="">
+    <Navbar className="px-5 py-4" color="dark" dark expand="md" sticky="top">
       <NavbarBrand tag={ReactLink} to="/">
         Blog App
       </NavbarBrand>
@@ -46,7 +46,7 @@ function CustomNavbar() {
         <Nav className="me-auto h3" navbar>
           <NavItem>
             <NavLink tag={ReactLink} to="/">
-              Home
+              All Post
             </NavLink>
           </NavItem>
           <NavItem>
@@ -79,13 +79,13 @@ function CustomNavbar() {
             <>
               <NavItem>
                 <NavLink tag={ReactLink} to={`/user/profile/${user.id}`}>
-                  Profile
+                  Profile {user.name}
                 </NavLink>
               </NavItem>
 
               <NavItem>
                 <NavLink tag={ReactLink} to="/user/dashboard">
-                  {user.email}
+                  Create Post
                 </NavLink>
               </NavItem>
               <NavItem>

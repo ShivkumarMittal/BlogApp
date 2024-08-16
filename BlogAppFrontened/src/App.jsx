@@ -15,6 +15,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import ProfileInfo from "./pages/user_routes/ProfileInfo";
 import PostPage from "./pages/PostPage";
 import UserProvider from "./context/UserProvider";
+import Categories from "./pages/Categories";
 function App() {
   return (
     <UserProvider>
@@ -26,6 +27,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/categories/:categoryId" element={<Categories />} />
           <Route path="/post/:postId" element={<PostPage />} />
           <Route path="/user" element={<PrivateRoute />}>
             <Route path="dashboard" element={<UserDashboard />} />

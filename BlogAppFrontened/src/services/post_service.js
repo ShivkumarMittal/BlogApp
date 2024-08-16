@@ -50,3 +50,9 @@ export const createComment = (comment, postId, userId) => {
     comment
   );
 };
+
+
+// get category wise post
+export const loadPostCategoriesWise =(categoryId)=>{
+  return privateAxios.get(`/api/category/${categoryId}/posts`).then(response=>response.data)
+}
