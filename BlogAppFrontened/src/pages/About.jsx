@@ -50,7 +50,7 @@ const About = () => {
                   className="img-fluid rounded-circle"
                 />
               </Media>
-              <Media body className="ml-3">
+              <Media body className="ml-5 mt-4">
                 <h3><strong>Shivkumar Mittal</strong></h3>
                 <h4>Final Year Student BTech CSE</h4>
                 <h5>Learning Java FullStack</h5>

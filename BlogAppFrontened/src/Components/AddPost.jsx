@@ -10,8 +10,10 @@ import {
 } from "../services/post_service";
 
 import { getCurrentUser, isLoggedIn, isTokenExpire } from "../auth";
+import { useNavigate } from "react-router-dom";
 
 function AddPost() {
+  const navigate = useNavigate();
   const editor = useRef(null);
   const [user, setuser] = useState(undefined);
   const [categories, setCategories] = useState([]);
@@ -72,10 +74,12 @@ function AddPost() {
     }
     if (!isLoggedIn()) {
       toast.error("Need to login first");
+      navigate("/login");
       return;
     }
     if (isTokenExpire()) {
       toast.error("Your session expired !! Please Login again");
+      navigate("/login");
       return;
     }
     // submit form

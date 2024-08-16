@@ -16,8 +16,10 @@ import { createComment, loadSinglePost } from "../services/post_service";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../services/helper";
 import { getCurrentUserId, isLoggedIn, isTokenExpire } from "../auth";
+import { useNavigate } from "react-router-dom";
 
 function PostPage() {
+  const navigate = useNavigate();
   const { postId } = useParams();
   const [post, setPost] = useState(null);
   const [comment, setComment] = useState({
@@ -50,10 +52,13 @@ function PostPage() {
   const submitComment = () => {
     if (!isLoggedIn()) {
       toast.error("Need to login first");
+      navigate("/login");
+      // useNavigate("/login");
       return;
     }
     if (isTokenExpire()) {
       toast.error("Your session expired !! Please Login again");
+      navigate("/login");
       return;
     }
     if (comment.comment.trim() == "") {
