@@ -17,8 +17,14 @@
 // export default About;
 
 import React from "react";
-import profilePic from "./../assets/profile.png";
-import { FaCommentDots, FaEdit, FaGithub, FaLinkedin, FaSignInAlt } from "react-icons/fa";
+import profilePic from "./../assets/photo.png";
+import {
+  FaCommentDots,
+  FaEdit,
+  FaGithub,
+  FaLinkedin,
+  FaSignInAlt,
+} from "react-icons/fa";
 import {
   Container,
   Row,
@@ -48,10 +54,13 @@ const About = () => {
                   src={profilePic}
                   alt="Profile Image"
                   className="img-fluid rounded-circle"
+                  style={{ width: "450px", height: "400px" }}
                 />
               </Media>
               <Media body className="ml-5 mt-4">
-                <h3><strong>Shivkumar Mittal</strong></h3>
+                <h3>
+                  <strong>Shivkumar Mittal</strong>
+                </h3>
                 <h4>Final Year Student BTech CSE</h4>
                 <h5>Learning Java FullStack</h5>
               </Media>
@@ -60,7 +69,9 @@ const About = () => {
           <Col md="8">
             <Card>
               <CardBody>
-                <h2><strong>About BlogApp Website</strong></h2>
+                <h2>
+                  <strong>About BlogApp Website</strong>
+                </h2>
                 <h3>
                   Thanks Viewers, for visiting my BlogApp Website. I created
                   this website as my personal project to explore my theoritical
@@ -93,16 +104,18 @@ const About = () => {
                 </p>
               </CardBody>
               <CardBody>
-              <Button
+                <Button
                   style={{ backgroundColor: "#4CAF50", borderColor: "#4CAF50" }}
                   className="mx-5"
+                  href="https://github.com/ShivkumarMittal/BlogApp"
                 >
                   <FaGithub /> Github
                 </Button>
-                
+
                 <Button
                   style={{ backgroundColor: "#4CAF50", borderColor: "#4CAF50" }}
                   className=" mx-1"
+                  href="https://www.linkedin.com/in/shivkumar-mittal-25291a262/"
                 >
                   <FaLinkedin /> Linkedin
                 </Button>
@@ -111,10 +124,11 @@ const About = () => {
           </Col>
         </Row>
         <Row className="mt-5">
-        <Card className="shadow-sm p-3 mb-5 bg-white rounded">
+          <Card className="shadow-sm p-3 mb-5 bg-white rounded">
             <CardBody>
-            <h3>
-              We would love if you add your post too and give your valuable feedback to other's post as a comment.
+              <h3>
+                I would love if you add your post too and give your valuable
+                feedback to other's post as a comment.
               </h3>
             </CardBody>
           </Card>
